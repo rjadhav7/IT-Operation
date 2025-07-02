@@ -1,1 +1,44 @@
-# IT-Operation
+# Install XRDP with GNOME GUI on Rocky Linux 9
+
+To enable remote desktop access using XRDP with the GNOME GUI on Rocky Linux 9, follow these steps:
+
+# Step 1: Enable Required Repositories
+
+Open a terminal and enable the CRB (CodeReady Builder) and EPEL (Extra Packages for Enterprise Linux) repositories:
+
+sudo dnf config-manager --set-enabled crb
+sudo dnf install epel-release -y
+# Step 2: Install XRDP
+
+Install the XRDP package:
+
+sudo dnf install xrdp -y
+Enable and start the XRDP service:
+sudo systemctl enable --now xrdp
+
+# Step 3: Configure the Firewall
+
+Open the RDP port (3389) in the firewall to allow incoming connections:
+
+sudo firewall-cmd --zone=public --add-port=3389/tcp --permanent
+sudo firewall-cmd --reload
+
+# Step 4: Set GNOME as the Default Session
+
+Ensure GNOME is installed and set as the default session for XRDP: Edit the .xsession file in your home directory: echo "gnome-session" > ~/.xsession
+
+# Step 5: Test the Connection
+
+Log out of your local session (RDP does not allow simultaneous local and remote logins for the same user).
+
+Use an RDP client (e.g., Remote Desktop Connection on Windows or Remmina on Linux) to connect to your Rocky Linux machine by entering its IP address.
+
+Tips and Best Practices
+
+Ensure you have administrative privileges to execute these commands.
+
+For better performance, use a stable network connection.
+
+If issues arise, check XRDP logs located in /var/log/xrdp.log for troubleshooting.
+
+This setup allows you to remotely access your Rocky Linux desktop with a smooth GNOME GUI experience.
