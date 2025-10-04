@@ -1,44 +1,42 @@
-# Install XRDP with GNOME GUI on Rocky Linux 9
+I'll help you set up a Terraform workflow to deploy EC2 resources with an Azure DevOps pipeline. Let me create a comprehensive solution for you.Now let me create a setup guide for you:Perfect! I've created a complete solution for deploying EC2 resources using Terraform with an Azure DevOps pipeline. Here's what I've provided:
 
-To enable remote desktop access using XRDP with the GNOME GUI on Rocky Linux 9, follow these steps:
+## 📦 What's Included:
 
-# Step 1: Enable Required Repositories
+1. **Terraform EC2 Configuration** - Complete infrastructure code including:
+   - EC2 instance with security group
+   - Optional Elastic IP
+   - Encrypted root volume
+   - S3 backend for state management
 
-Open a terminal and enable the CRB (CodeReady Builder) and EPEL (Extra Packages for Enterprise Linux) repositories:
+2. **Variables & Outputs** - Flexible configuration with:
+   - Configurable instance type, AMI, networking
+   - Outputs for instance IDs, IPs, and security groups
 
-sudo dnf config-manager --set-enabled crb
-sudo dnf install epel-release -y
-# Step 2: Install XRDP
+3. **User Data Script** - Bootstrap script that installs:
+   - Docker
+   - Apache web server
+   - Basic utilities
 
-Install the XRDP package:
+4. **Azure DevOps Pipeline** - Multi-stage pipeline with:
+   - **Validate**: Syntax and format checking
+   - **Plan**: Generate and review changes
+   - **Apply**: Deploy with approval gate (production environment)
+   - **Destroy**: Manual destruction stage (disabled by default)
 
-sudo dnf install xrdp -y
-Enable and start the XRDP service:
-sudo systemctl enable --now xrdp
+5. **Comprehensive Setup Guide** - Step-by-step instructions covering everything
 
-# Step 3: Configure the Firewall
+## 🚀 Key Features:
 
-Open the RDP port (3389) in the firewall to allow incoming connections:
+- **State Management**: Remote state in S3 with DynamoDB locking
+- **Approval Gates**: Manual approval required before applying to production
+- **Branch Strategy**: Full deployment on `main`, validation only on other branches
+- **Security**: IAM-based authentication, encrypted volumes, security groups
+- **Reusability**: Parameterized configuration using variables
 
-sudo firewall-cmd --zone=public --add-port=3389/tcp --permanent
-sudo firewall-cmd --reload
+## 📋 Quick Start:
 
-# Step 4: Set GNOME as the Default Session
+1. Set up AWS resources (S3 bucket, DynamoDB table, IAM user)
+2. Configure Azure DevOps (install Terraform extension, create service connection)
+3. Push code to your Azure Repos
+4. Create and run the pipeline
 
-Ensure GNOME is installed and set as the default session for XRDP: Edit the .xsession file in your home directory: echo "gnome-session" > ~/.xsession
-
-# Step 5: Test the Connection
-
-Log out of your local session (RDP does not allow simultaneous local and remote logins for the same user).
-
-Use an RDP client (e.g., Remote Desktop Connection on Windows or Remmina on Linux) to connect to your Rocky Linux machine by entering its IP address.
-
-Tips and Best Practices
-
-Ensure you have administrative privileges to execute these commands.
-
-For better performance, use a stable network connection.
-
-If issues arise, check XRDP logs located in /var/log/xrdp.log for troubleshooting.
-
-This setup allows you to remotely access your Rocky Linux desktop with a smooth GNOME GUI experience.
