@@ -1,5 +1,3 @@
-I'll help you set up a Terraform workflow to deploy EC2 resources with an Azure DevOps pipeline. Let me create a comprehensive solution for you.Now let me create a setup guide for you:Perfect! I've created a complete solution for deploying EC2 resources using Terraform with an Azure DevOps pipeline. Here's what I've provided:
-
 ## 📦 What's Included:
 
 1. **Terraform EC2 Configuration** - Complete infrastructure code including:
